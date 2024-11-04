@@ -64,3 +64,8 @@ that has been auto-generated on railway, and add to your `.env`. Or use value fo
 
 ### additional resources
 - **Tutorial blog post**: [Vendure Tutorial on FunkyTon](https://funkyton.com/vendure-tutorial/)
+
+
+### License
+
+This project is licensed under the GPLv3 License. See the [LICENSE](LICENSE.md) file for details.
