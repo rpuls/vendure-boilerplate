@@ -92,6 +92,9 @@ importers:
       i18next-resources-to-backend:
         specifier: ^1.2.0
         version: 1.2.1
+      intl-parse-accept-language:
+        specifier: ^1.0.0
+        version: 1.0.0
       isbot:
         specifier: ^3.7.1
         version: 3.8.0
