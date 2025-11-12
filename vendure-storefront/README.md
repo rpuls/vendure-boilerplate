@@ -25,42 +25,35 @@ General things missing:
 ## Development
 
 1. Clone this repo
-2. `yarn install`
+2. `pnpm install`
 3. Create a `.env` file in the root dir with the following command and update it with your variables:
-   
+
    ```bash
    cp .env.template .env
    ```
-   
-5. `yarn dev` - run the storefront with a local Remix server
-6. `yarn dev:cf` - runs locally with the Cloudflare Pages configuration
+
+4. `pnpm dev` - run the storefront with a local Remix server
 
 ### Vendure Server
 
-This storefront requires a Vendure V2 server. You can either run a local instance, or use our public demo server.  
-If you're looking for V1 support, [75eb880](https://funkyton.com/vendure-tutorial//tree/75eb880052d7f76b2026fc917cf545996012e3ac) is the last supported commit.
+This storefront requires a Vendure server. You can either run a local instance, or use vendures public demo server.
+
+#### Local
+
+Use the vendure-backend in this repo:
+
+1. Follow the setup instructions in the main README
+2. Start the backend: `cd ../vendure-backend && pnpm dev`
+3. The storefront will connect to `http://localhost:3000/shop-api`
+
+For the public demo server, use: `https://readonlydemo.vendure.io/shop-api`
 
 #### Code Generation
 
 Whenever the Graphql documents (the constants using the `gql` tag) in the [./app/providers](./app/providers) dir changes,
-you should run `yarn generate` to generate new sdk definitions.
+you should run `pnpm generate` to generate new sdk definitions.
 
 For a more detailed guide on how to work with code generation, check the wiki about [querying custom fields](https://funkyton.com/vendure-tutorial//wiki/Querying-custom-fields).
-
-#### Local
-
-You can set up a local instance, populated with test data by following the instructions in the Vendure [Getting Started guide](https://docs.vendure.io/getting-started/). Note that make sure you have enabled the `bearer` method for managing session tokens:
-
-```ts
-// vendure-config.ts
-export const config: VendureConfig = {
-  authOptions: {
-    tokenMethod: ['bearer', 'cookie'], // or just 'bearer'
-    // ...
-  },
-  // ...
-};
-```
 
 ## Payment Gateways
 
@@ -95,7 +88,16 @@ There is a publicly-available demo instance at https://readonlydemo.vendure.io/s
 
 ## Deployment
 
-This repo is configured to deploy to either Netlify or Cloudflare Pages or to build locally with specialised build targets (`build(:nf/:cf)`).
+This repo is configured to deploy to Railway (recommended).
+
+### Railway (Recommended)
+
+Railway automatically detects Node.js apps and uses Railpack for fast deployments:
+
+1. Connect your GitHub repo to Railway
+2. Railway will automatically build using `pnpm install` and `pnpm build`
+3. The app will start with `pnpm start`
+
 
 No special setup should be needed, as the [remix.config.js](./remix.config.js) file contains a check for the `process.env.CF_PAGES` / `process.env.NETLIFY` environment variable to determine whether to use the Cloudflare Pages or Netlify server configuration.
 
